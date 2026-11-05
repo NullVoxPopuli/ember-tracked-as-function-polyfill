@@ -78,8 +78,5 @@
     "version": 2,
     "type": "addon",
     "main": "addon-main.cjs"
-  },
-  "peerDependencies": {
-    "ember-source": ">= 3.28.0"
   }
 }
