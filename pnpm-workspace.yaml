@@ -12,5 +12,6 @@ autoInstallPeers: false
 resolvePeersFromWorkspaceRoot: false
 
 injectWorkspacePackages: true
+dedupeInjectedDeps: false
 syncInjectedDepsAfterScripts:
   - build
