@@ -1,9 +1,9 @@
-'use strict';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { transformSync } from '@babel/core';
 
-const { test } = require('node:test');
-const assert = require('node:assert/strict');
-const babel = require('@babel/core');
-
+const require = createRequire(import.meta.url);
 const plugin = require('../babel-plugin.cjs');
 
 function transform(code, { typescript = false } = {}) {
@@ -16,14 +16,12 @@ function transform(code, { typescript = false } = {}) {
     ]);
   }
 
-  return babel
-    .transformSync(code, {
-      babelrc: false,
-      configFile: false,
-      filename: typescript ? 'file.ts' : 'file.js',
-      plugins,
-    })
-    .code.trim();
+  return transformSync(code, {
+    babelrc: false,
+    configFile: false,
+    filename: typescript ? 'file.ts' : 'file.js',
+    plugins,
+  }).code.trim();
 }
 
 test('rewrites a lone tracked import', () => {
@@ -110,7 +108,7 @@ test('keeps the binding usable by later plugins', () => {
     },
   });
 
-  babel.transformSync(
+  transformSync(
     `import { cached, tracked } from '@glimmer/tracking';\ntracked(0);`,
     {
       babelrc: false,

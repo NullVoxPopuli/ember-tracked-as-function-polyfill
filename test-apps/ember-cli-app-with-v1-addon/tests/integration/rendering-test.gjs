@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render, rerender } from '@ember/test-helpers';
-import { tracked } from '#src/index.ts';
+import { tracked } from '@glimmer/tracking';
 import Component from '@glimmer/component';
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
@@ -37,8 +37,16 @@ module('tracked() | rendering', function (hooks) {
       <template>
         {{#let (tracked 2) as |count|}}
           <output>{{count.value}}</output>
-          <button id="inc" type="button" {{on "click" (fn increment count)}}>add</button>
-          <button id="set" type="button" {{on "click" (fn count.set 10)}}>set</button>
+          <button
+            id="inc"
+            type="button"
+            {{on "click" (fn increment count)}}
+          >add</button>
+          <button
+            id="set"
+            type="button"
+            {{on "click" (fn count.set 10)}}
+          >set</button>
         {{/let}}
       </template>,
     );

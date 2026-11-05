@@ -12,10 +12,9 @@ concurrency:
 
 jobs:
   lint:
-    name: Lints
+    name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -26,13 +25,10 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
 
-  addon:
-    name: Addon tests
+  test:
+    name: Test
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -41,14 +37,12 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter ember-tracked-as-function-polyfill test
-      - id: set-matrix
-        working-directory: ember-tracked-as-function-polyfill
-        run: echo "matrix=$(pnpm -s dlx @embroider/try list)" >> $GITHUB_OUTPUT
+      - run: pnpm test
 
-  test-apps:
-    name: ${{ matrix.app }}
+  try-scenarios:
+    name: ${{ matrix.app }} / ${{ matrix.scenario }}
     runs-on: ubuntu-latest
+    needs: test
     timeout-minutes: 15
     strategy:
       fail-fast: false
@@ -59,9 +53,11 @@ jobs:
           - vite-app
           - vite-app-with-v1-addon
           - vite-app-with-v2-addon
-          - minimum-supported/ember-cli-app
-          - minimum-supported/ember-cli-app-with-v1-addon
-
+        scenario:
+          - ember-lts-4.12
+          - ember-lts-5.12
+          - ember-latest
+          - ember-beta
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -70,29 +66,11 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm test
-        working-directory: test-apps/${{ matrix.app }}
-
-  try-scenarios:
-    name: ${{ matrix.name }}
-    runs-on: ubuntu-latest
-    needs: addon
-    timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.addon.outputs.matrix) }}
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
       - name: Apply scenario
-        working-directory: ember-tracked-as-function-polyfill
-        run: pnpm dlx @embroider/try apply ${{ matrix.name }}
-      - run: pnpm install --no-lockfile
-      - run: pnpm --filter ember-tracked-as-function-polyfill test
-        env: ${{ matrix.env }}
+        working-directory: test-apps/${{ matrix.app }}
+        run: pnpm dlx @embroider/try apply ${{ matrix.scenario }}
+      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm build
+      - name: Test
+        working-directory: test-apps/${{ matrix.app }}
+        run: pnpm test

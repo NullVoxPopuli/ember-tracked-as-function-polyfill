@@ -5,9 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "pnpm --filter ember-tracked-as-function-polyfill build && pnpm --filter v2-addon build",
-    "lint": "pnpm --filter ember-tracked-as-function-polyfill lint",
-    "sync-tests": "node scripts/sync-tests.mjs",
-    "test": "pnpm build && pnpm --filter ember-tracked-as-function-polyfill test && pnpm --workspace-concurrency=1 --filter './test-apps/**' test"
+    "lint": "pnpm --filter ember-tracked-as-function-polyfill lint && pnpm build && pnpm --filter vite-app lint:types",
+    "test": "pnpm build && pnpm --filter ember-tracked-as-function-polyfill test && pnpm --filter \"./test-apps/**\" --workspace-concurrency=1 test"
   },
   "packageManager": "pnpm@10.18.2"
 }

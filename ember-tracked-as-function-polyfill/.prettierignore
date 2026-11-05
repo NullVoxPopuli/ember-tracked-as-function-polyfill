@@ -14,4 +14,3 @@ config/ember-cli-update.json
 *.yml
 *.md
 *.html
-tests/shared/
