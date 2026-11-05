@@ -1,0 +1,24 @@
+{
+  "name": "v1-addon",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Test fixture: v1 addon that uses tracked() from @glimmer/tracking",
+  "keywords": [
+    "ember-addon"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.25.2",
+    "ember-auto-import": "^2.10.0",
+    "ember-cli-babel": "^8.2.0",
+    "ember-cli-htmlbars": "^7.0.1",
+    "ember-tracked-as-function-polyfill": "workspace:*"
+  },
+  "peerDependencies": {
+    "@glimmer/component": ">= 1.1.2",
+    "ember-source": ">= 3.28.0"
+  },
+  "ember": {
+    "edition": "octane"
+  }
+}

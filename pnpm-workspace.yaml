@@ -1,0 +1,16 @@
+packages:
+  - ember-tracked-as-function-polyfill
+  - test-packages/*
+  - test-apps/*
+  - test-apps/minimum-supported/*
+
+allowBuilds:
+  esbuild: false
+  core-js: false
+
+autoInstallPeers: false
+resolvePeersFromWorkspaceRoot: false
+
+injectWorkspacePackages: true
+syncInjectedDepsAfterScripts:
+  - build

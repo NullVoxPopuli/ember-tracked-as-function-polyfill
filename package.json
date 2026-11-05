@@ -1,0 +1,13 @@
+{
+  "name": "ember-tracked-as-function-polyfill-monorepo",
+  "private": true,
+  "repository": "https://github.com/NullVoxPopuli/ember-tracked-as-function-polyfill",
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm --filter ember-tracked-as-function-polyfill build && pnpm --filter v2-addon build",
+    "lint": "pnpm --filter ember-tracked-as-function-polyfill lint",
+    "sync-tests": "node scripts/sync-tests.mjs",
+    "test": "pnpm build && pnpm --filter ember-tracked-as-function-polyfill test && pnpm --workspace-concurrency=1 --filter './test-apps/**' test"
+  },
+  "packageManager": "pnpm@10.18.2"
+}

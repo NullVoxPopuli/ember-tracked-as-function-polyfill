@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-tests/
+declarations/
+tmp/
+*.tgz
+.eslintcache
+.prettiercache
+*.local
+
+/ember-tracked-as-function-polyfill/ember-cli-build.cjs
+/ember-tracked-as-function-polyfill/config/optional-features.json
