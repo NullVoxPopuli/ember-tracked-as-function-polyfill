@@ -1,0 +1,18 @@
+{
+  "solution": {
+    "ember-tracked-as-function-polyfill": {
+      "impact": "patch",
+      "oldVersion": "0.0.1",
+      "newVersion": "0.0.2",
+      "tagName": "latest",
+      "constraints": [
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
+        }
+      ],
+      "pkgJSONPath": "./ember-tracked-as-function-polyfill/package.json"
+    }
+  },
+  "description": "## Release (2026-11-05)\n\n* ember-tracked-as-function-polyfill 0.0.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-tracked-as-function-polyfill`\n  * [#2](https://github.com/NullVoxPopuli/ember-tracked-as-function-polyfill/pull/2) Widen peer range ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#4](https://github.com/NullVoxPopuli/ember-tracked-as-function-polyfill/pull/4) Use appEmberSatisfies and share one injected addon copy ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :house: Internal\n* [#1](https://github.com/NullVoxPopuli/ember-tracked-as-function-polyfill/pull/1) Setup release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+}

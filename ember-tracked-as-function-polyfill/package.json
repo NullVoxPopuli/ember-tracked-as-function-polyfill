@@ -1,6 +1,6 @@
 {
   "name": "ember-tracked-as-function-polyfill",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Polyfill for RFC 1071: tracked() as a function, TrackedValue, and @tracked({ equals })",
   "keywords": [
     "ember-addon",
