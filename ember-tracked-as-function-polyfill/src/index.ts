@@ -1,5 +1,5 @@
 import { tracked as nativeTracked } from '@ember/-internals/metal';
-import { dependencySatisfies, macroCondition } from '@embroider/macros';
+import { appEmberSatisfies, macroCondition } from '@embroider/macros';
 
 import { tracked as polyfilledTracked } from './-private/tracked.ts';
 
@@ -12,7 +12,7 @@ export type {
 export type { TrackedDecorator } from './-private/tracked.ts';
 
 export const tracked: typeof polyfilledTracked = macroCondition(
-  dependencySatisfies('ember-source', '>= 7.3.0-alpha.1'),
+  appEmberSatisfies('>= 7.3.0-alpha.1'),
 )
   ? (nativeTracked as unknown as typeof polyfilledTracked)
   : polyfilledTracked;
